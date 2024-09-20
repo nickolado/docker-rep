@@ -16,4 +16,9 @@ processors:
   - add_cloud_metadata: ~
 
 
+# Logging
+## Esta linha precisa ser alterada para não acumular o syslog das VMs de informações
+
+logging.level: error
+
 
