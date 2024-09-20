@@ -55,6 +55,23 @@ services:
     depends_on:
       - elasticsearch
 
+  logstash:
+      image: docker.elastic.co/logstash/logstash:7.17.0
+      container_name: logstash
+      volumes:
+          - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+          - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+          - ./logstash/csv:/csv
+      ports:
+          - "8080:8080"
+          - "5000:5000" 
+          - "9600:9600"
+          - "5044:5044"
+      networks:
+          - elk
+      depends_on:
+          - elasticsearch              
+
   nginx:
       image: nginx:latest
       container_name: nginx
@@ -64,7 +81,6 @@ services:
         - ./nginx/nginx.conf:/etc/nginx.conf:ro
       networks:
         - elk
-
 
 volumes:
   esdata:
