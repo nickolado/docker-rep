@@ -55,6 +55,17 @@ services:
     depends_on:
       - elasticsearch
 
+  nginx:
+      image: nginx:latest
+      container_name: nginx
+      ports:
+        - "80:80"
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx.conf:ro
+      networks:
+        - elk
+
+
 volumes:
   esdata:
 
