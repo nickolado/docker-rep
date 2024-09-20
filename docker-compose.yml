@@ -82,6 +82,17 @@ services:
       networks:
         - elk
 
+  postgresql: ## conferir pq nao está dando certo
+      image: postgres:latest
+      environment:
+        POSTGRES_USER: daniel
+        POSTGRES_PASSWORD: 123456
+        POSTGRES_DB: testes
+      ports:
+        - "5432:5432" 
+      networks:
+        - elk        
+
 volumes:
   esdata:
 
