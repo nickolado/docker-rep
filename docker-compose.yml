@@ -26,7 +26,7 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - elasticsearch   
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.17.0
@@ -54,6 +54,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
+      - kibana
 
   logstash:
       image: docker.elastic.co/logstash/logstash:7.17.0
@@ -82,7 +83,7 @@ services:
       networks:
         - elk
 
-  postgresql: ## conferir pq nao está dando certo
+  postgresql: 
       image: postgres:latest
       container_name: postgresql
       environment:
@@ -92,7 +93,19 @@ services:
       ports:
         - "5432:5432" 
       networks:
-        - elk        
+        - elk
+  ubuntu:
+      build:
+        context: .
+        dockerfile: ./ubuntu/Dockerfile      
+      container_name: ubuntu
+      volumes:
+      - ./ubuntu/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro  # Arquivo de configuração do Metricbeat
+      networks:
+      - elk
+      depends_on:
+      - elasticsearch
+      - kibana  
 
 volumes:
   esdata:

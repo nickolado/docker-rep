@@ -1,1 +1,1 @@
-Aqui contém os containers para criação do ELK Stack
+Aqui contém os containers para criação do ELK Stack  

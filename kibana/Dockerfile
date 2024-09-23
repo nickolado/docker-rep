@@ -1,4 +1,5 @@
 # Imagem oficial do Kibana
+
 FROM docker.elastic.co/kibana/kibana:7.17.0
 
 # Metricbeat
@@ -11,7 +12,7 @@ RUN apt-get update && \
 
 # Copiar a configuração do metricbeat para o container
 
-COPY metricbeat.yml /etc/metricbeat/metricbeat.yml
+COPY .\metricbeat\metricbeat.yml /etc/metricbeat/metricbeat.yml
 
 # Permissões
 
