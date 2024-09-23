@@ -6,11 +6,13 @@ services:
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=false
+      - xpack.security.enabled=true
+      - xpack.security.authc.api_key.enabled=true
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch/elasticseach.yml:/usr/share/elasticseach.yml:ro
     ports:
       - "9200:9200"
     networks:
