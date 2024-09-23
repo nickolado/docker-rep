@@ -6,13 +6,11 @@ services:
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=true
-      - xpack.security.authc.api_key.enabled=true
+      - xpack.security.enabled=false
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - esdata:/usr/share/elasticsearch/data
-      - ./elasticsearch/elasticseach.yml:/usr/share/elasticseach.yml:ro
     ports:
       - "9200:9200"
     networks:
@@ -86,6 +84,7 @@ services:
 
   postgresql: ## conferir pq nao está dando certo
       image: postgres:latest
+      container_name: postgresql
       environment:
         POSTGRES_USER: daniel
         POSTGRES_PASSWORD: 123456
@@ -101,3 +100,5 @@ volumes:
 networks:
   elk:
     driver: bridge
+  banco:
+    driver: bridge  

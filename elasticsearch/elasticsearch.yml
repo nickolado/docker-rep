@@ -1,3 +1,11 @@
+# ----------------------------------- Diretório ------------------------------------
+# Caminho do diretório lib e log:
+
+path.data: /usr/share/elasticsearch/lib/
+path.logs: /usr/share/elasticsearch/logs/
+
+# ----------------------------------- Segurança ------------------------------------
+
 discovery.type: single-node
 xpack.security.enabled: true
 xpack.security.authc.api_key.enabled: true

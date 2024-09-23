@@ -1,25 +1,29 @@
+# Configuração do metricbeat
 metricbeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false
 
-metricbeat.modules:
-    - module: nginx
-      metricsets: ["stubstatus"]
-      period: 10s
-      hosts: ["http://192.168.4.89:80"] 
-    - module: postgresql
-      metricsets: ["database", "table", "statement"] 
-      hosts: ["localhost:5432"] 
-      username: "daniel"
-      password: "123456"
+# Módulos
 
+metricbeat.modules:
+  - module: nginx
+    metricsets: ["stubstatus"]
+    period: 10s
+    hosts: ["http://192.168.4.89:80"] 
+  - module: postgresql
+    metricsets: ["database", "statement"] 
+    period: 10s
+    hosts: ["192.168.4.89:5432"] 
+    username: "daniel"
+    password: "123456"
+
+# Configuração de saída para envio das métricas
 output.elasticsearch:
   hosts: ["http://192.168.4.89:9200"]
 
 processors:
   - add_host_metadata: ~
   - add_cloud_metadata: ~
-
 
 # Logging
 ## Esta linha precisa ser alterada para não acumular o syslog das VMs de informações
