@@ -1,0 +1,56 @@
+# Configuração do metricbeat
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+# Módulos
+
+metricbeat.modules:
+
+# Monitoramento do banco de dados    
+  
+  - module: postgresql
+    metricsets: 
+      - database
+      - bgwriter
+      - activity
+    period: 10s
+    hosts: ["postgres://192.168.4.89:5432"] 
+    username: "daniel"
+    password: "123456"
+    enabled: true
+
+# Monitoramento dos containers
+
+  - module: docker 
+    metricsets:
+      - container
+      - cpu
+      - diskio
+      - healthcheck
+      - info
+      - memory
+      - network
+    hosts: ["unix:///var/run/docker.sock"]  
+    period: 10s  
+
+# Configuração de saída para envio das métricas
+output.elasticsearch:
+  hosts: ["http://192.168.4.89:9200"]
+
+# Configuração kibana
+setup.kibana:
+  host: "http://kibana:5601"
+
+# Nao sei o que é
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  
+
+# Logging
+## Esta linha precisa ser alterada para não acumular o syslog das VMs de informações
+
+logging.level: error
+
+
