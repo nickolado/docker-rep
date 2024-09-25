@@ -84,12 +84,10 @@ services:
         - elk
 
   postgresql: 
-      image: postgres:latest
+      build:
+        context: .
+        dockerfile: ./postgresql/Dockerfile
       container_name: postgresql
-      environment:
-        POSTGRES_USER: daniel
-        POSTGRES_PASSWORD: 123456
-        POSTGRES_DB: testes
       ports:
         - "5432:5432" 
       networks:
