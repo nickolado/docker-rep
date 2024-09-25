@@ -14,7 +14,7 @@ RUN add-apt-repository "deb https://artifacts.elastic.co/packages/7.x/apt stable
 RUN apt-get update && apt-get install -y metricbeat
 
 # Copiar o arquivo de configuração do Metricbeat para o container
-COPY /postgres/metricbeat.yml /etc/metricbeat/metricbeat.yml
+COPY /postgresql/metricbeat.yml /etc/metricbeat/metricbeat.yml
 
 # Variaveis do ambiente do BD
 ENV POSTGRES_DB=testes
@@ -32,7 +32,7 @@ EXPOSE 5432
 EXPOSE 5066
 
 # Adicionar entrypoint para iniciar o PostgreSQL e Metricbeat
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY /postgresql/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
