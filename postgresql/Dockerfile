@@ -19,7 +19,7 @@ COPY /postgresql/metricbeat.yml /etc/metricbeat/metricbeat.yml
 # Variaveis do ambiente do BD
 ENV POSTGRES_DB=testes
 ENV POSTGRES_USER=daniel
-ENV POSTGRESS_PASSWORD=123456
+ENV POSTGRES_PASSWORD=123456
 
 # Copiar arquivos SQL ou scripts para inicializar o banco de dados (opcional)
 # Coloque seus arquivos .sql ou .sh em uma pasta chamada "scripts" no mesmo diretório do Dockerfile
