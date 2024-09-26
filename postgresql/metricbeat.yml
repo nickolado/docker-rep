@@ -40,7 +40,7 @@ output.elasticsearch:
 
 # Configuração kibana
 setup.kibana:
-  host: "http://kibana:5601"
+  host: "http://192.168.4.89:5601"
 
 # Processadores (servem para modificar as fields ou alimentar com mais dados)
 processors:
