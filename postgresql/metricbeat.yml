@@ -15,7 +15,7 @@ metricbeat.modules:
       - bgwriter
       - activity
     period: 10s
-    hosts: ["postgres://192.168.4.89:5432"] 
+    hosts: ["postgres://192.168.4.89:5432?sslmode=disable"] 
     username: "daniel"
     password: "123456"
     enabled: true
@@ -42,10 +42,14 @@ output.elasticsearch:
 setup.kibana:
   host: "http://kibana:5601"
 
-# Nao sei o que é
+# Processadores (servem para modificar as fields ou alimentar com mais dados)
 processors:
   - add_host_metadata: ~
   - add_cloud_metadata: ~
+  - include_fields:
+      fields: ["postgresql.*"]
+#  - drop_fields:
+#      fields: ["system.*, host.*"]    
   
 
 # Logging
