@@ -7,32 +7,32 @@ metricbeat.config.modules:
 
 metricbeat.modules:
 
+# Monitoramento do sistema
+
+  - module: system 
+    metricsets: 
+      - cpu
+      - load
+      - memory
+      - network
+      - process
+      - process_summary
+    processes: ['.*']
+    processes.include_top_n:
+      by_cpu: 5
+      by_memory: 5  
+    cpu.metrics: ["percentages", "normalized_percentages"]
+
 # Monitoramento do banco de dados    
   
   - module: postgresql
-    metricsets: 
-      - database
-      - bgwriter
-      - activity
+    metricsets: ["database", "statement"] 
     period: 10s
-    hosts: ["postgres://192.168.4.89:5432"] # ?sslmode=disable para desabilitar a conexao pelo ssl
-    username: "daniel"
-    password: "123456"
-    enabled: true
+    hosts: ["postgres://192.168.4.89:5432/testes?sslmode=disable"]  # ?sslmode=disable para desabilitar a conexao pelo ssl
+    username: daniel
+    password: 123456
+    ssl.enabled: false
 
-# Monitoramento dos containers
-
-  - module: docker 
-    metricsets:
-      - container
-      - cpu
-      - diskio
-      - healthcheck
-      - info
-      - memory
-      - network
-    hosts: ["unix:///var/run/docker.sock"]  
-    period: 10s  
 
 # Configuração de saída para envio das métricas
 output.elasticsearch:
@@ -40,16 +40,12 @@ output.elasticsearch:
 
 # Configuração kibana
 setup.kibana:
-  host: "http://192.168.4.89:5601"
+  host: "http://kibana:5601"
 
-# Processadores (servem para modificar as fields ou alimentar com mais dados)
+# Nao sei o que é
 processors:
   - add_host_metadata: ~
   - add_cloud_metadata: ~
-  - include_fields:
-      fields: ["postgresql.*"]
-#  - drop_fields:
-#      fields: ["system.*, host.*"]    
   
 
 # Logging

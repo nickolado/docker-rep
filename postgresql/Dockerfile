@@ -1,5 +1,4 @@
 # Imagem Postgres
-
 FROM postgres:15.1
 
 # Atualizar pacotes e instalar dependências necessárias
@@ -36,5 +35,15 @@ COPY /postgresql/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-# Set the default command to run PostgreSQL
-CMD ["postgres"]
+# Copiar arquivos conf do Postgres
+# RUN rm /var/lib/postgresql/data/postgresql.conf 
+#COPY /postgresql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
+
+# Comandos para executar postgres e metricbeat
+
+CMD ["postgres", "metricbeat", "-e"]
+
+# Rodar comando para habilitar o modulo do Postgres no Metricbeat
+
+RUN metricbeat modules enable postgresql
+RUN metricbeat modules enable system
