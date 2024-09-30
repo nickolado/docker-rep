@@ -1,0 +1,21 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - /var/lib/docker/containers/*/*.log
+      - /var/log/syslog
+      - /var/log/*.log
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: "elastic"
+  password: "changeme"  
+
+setup.kibana:
+  host: "http://kibana:5601"
+
+
+# Logging
+## Esta linha precisa ser alterada para não acumular o syslog das VMs de informações
+
+logging.level: error
+

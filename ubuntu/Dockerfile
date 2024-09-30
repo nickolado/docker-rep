@@ -10,10 +10,11 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
 
 # Instalar o Metricbeat
-RUN apt-get update && apt-get install -y metricbeat
+RUN apt-get update && apt-get install -y metricbeat && apt install -y filebeat
 
 # Copiar o arquivo de configuração do Metricbeat para o container
 COPY /ubuntu/metricbeat.yml /etc/metricbeat/metricbeat.yml
+COPY /ubuntu/filebeat.yml /etc/metricbeat/filebeat.yml
 
 # Configurar o Metricbeat para iniciar automaticamente
 RUN metricbeat modules enable system
