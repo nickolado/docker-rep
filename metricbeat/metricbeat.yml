@@ -61,7 +61,7 @@ output.elasticsearch:
 setup.kibana:
   host: "http://kibana:5601"
 
-# Nao sei o que é
+# Processadores
 processors:
   - add_host_metadata: ~
   - add_cloud_metadata: ~

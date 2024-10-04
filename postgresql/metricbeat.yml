@@ -36,11 +36,11 @@ metricbeat.modules:
 
 # Configuração de saída para envio das métricas
 output.elasticsearch:
-  hosts: ["http://192.168.4.89:9200"]
+  hosts: ["http://192.168.4.89:9200", "192.168.1.141:9200"]
 
 # Configuração kibana
 setup.kibana:
-  host: "http://kibana:5601"
+  host: "http://192.168.1.141:5601"
 
 # Nao sei o que é
 processors:

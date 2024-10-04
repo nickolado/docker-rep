@@ -18,9 +18,17 @@ COPY /ubuntu/filebeat.yml /etc/metricbeat/filebeat.yml
 
 # Configurar o Metricbeat para iniciar automaticamente
 RUN metricbeat modules enable system
+RUN filebeat modules enable system
 
 # Expor a porta padrão do Kibana
 EXPOSE 5601
+EXPOSE 5044
+
+# Copiar o script de entrada
+COPY /ubuntu/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
 
 # Comando para iniciar o Metricbeat
-CMD ["metricbeat", "-e"]
+CMD ["/usr/local/bin/start.sh"]
+
+
