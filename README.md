@@ -16,9 +16,9 @@ Um pipeline de processamento de dados que coleta, transforma e envia logs e even
 
 <strong>Beats:</strong>
 
-Filebeat: Um agente leve que coleta e envia logs de arquivos para o Logstash ou diretamente para o Elasticsearch.
+<strong>Filebeat:</strong> Um agente leve que coleta e envia logs de arquivos para o Logstash ou diretamente para o Elasticsearch.
 
-Metricbeat: Um agente que coleta e envia métricas do sistema e de serviços para o Logstash ou Elasticsearch, permitindo monitoramento e análise de desempenho.
+<strong>Metricbeat:</strong> Um agente que coleta e envia métricas do sistema e de serviços para o Logstash ou Elasticsearch, permitindo monitoramento e análise de desempenho.
 
 <h2>Resumo</h2>
 
