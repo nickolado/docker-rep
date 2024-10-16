@@ -49,4 +49,5 @@ CMD ["postgres", "metricbeat", "-e"]
 RUN metricbeat modules enable postgresql
 RUN metricbeat modules enable system
 RUN metricbeat setup --dashboards
+#testar depois
 #RUN filebeat setup --dashboards
