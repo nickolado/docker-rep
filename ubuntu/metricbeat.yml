@@ -1,7 +1,10 @@
 # Configuração do metricbeat
+# Esse bloco configura com o metricbeat deve carregar os modulosd dos serviços
+
 metricbeat.config.modules:
-  path: ${path.config}/modules.d/*.yml
-  reload.enabled: false
+  path: ${path.config}/modules.d/*.yml # caminho dos arquivos
+  reload.enabled: false # controla se o metricbeat deve monitorar as mudanças nos arquivos de configuração dos módulos enquanto está em exec
+ #reload.enabled: false =  não recarrega auto
 
 # Módulos
 
