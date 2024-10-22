@@ -13,7 +13,6 @@ output.elasticsearch:
 setup.kibana:
   host: "http://192.168.4.89:5601"
 
-
 # Logging
 ## Esta linha precisa ser alterada para não acumular o syslog das VMs de informações
 

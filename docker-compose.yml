@@ -9,6 +9,11 @@ services:
       - xpack.security.enabled=false
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"  
     volumes:
       - esdata:/usr/share/elasticsearch/data
     ports:
@@ -21,40 +26,17 @@ services:
     container_name: kibana
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3" 
     ports:
       - "5601:5601"
     networks:
       - elk
     depends_on:
       - elasticsearch   
-
-  #filebeat:
-  #  image: docker.elastic.co/beats/filebeat:7.17.0
-  #  container_name: filebeat
-  #  user: root
-  #  volumes:
-  #    - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-  #    - //var/lib/docker/containers:/var/lib/docker/containers:ro
-  #    - //var/run/docker.sock:/var/run/docker.sock
-  #  networks:
-  #    - elk
-  #  depends_on:
-  #    - elasticsearch
-
-  #metricbeat:
-  #  image: docker.elastic.co/beats/metricbeat:7.17.0
-  #  container_name: metricbeat
-  #  user: root
-  #  volumes:
-  #    - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
-  #    - //proc:/hostfs/proc:ro
-  #    - //sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-  #    - //:/hostfs:ro
-  #  networks:
-  #    - elk
-  #  depends_on:
-  #    - elasticsearch
-  #    - kibana
 
   logstash:
       image: docker.elastic.co/logstash/logstash:7.17.0
@@ -99,7 +81,13 @@ services:
         context: .
         dockerfile: ./ubuntu/Dockerfile      
       container_name: ubuntu
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "10m"
+          max-file: "3"
       volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./ubuntu/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro  # Arquivo de configuração do Metricbeat
       networks:
       - elk
